@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <div>
+            <input id="username" type="text" placeholder="Username" > <br><br>
+            <input id="password" type="password" placeholder="**********" > <br><br>
+            <button onclick="login()">Login</button>
+        </div>
+    </main>
+</body>
+</html>
+
+<script>
+    let username = document.getElementById("username")
+    let password  = document.getElementById("password")
+    let allUser = JSON.parse(localStorage.getItem("users"))
+    console.log(allUser);
+
+    function login(){
+        let found = allUser.find((el)=> el.username == username.value && el.password == password.value);
+        console.log(found);
+        if(found){
+            localStorage.setItem("currentUser", JSON.stringify(found))
+            alert("Login Successful");
+            window.location.href = "dashboard.html"
+        }else{
+            alert("User not found")
+        }
+    }
+</script>

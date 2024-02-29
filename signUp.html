@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <div>
+            <input id="username" type="text" placeholder="Username" > <br><br>
+            <input id="email" type="text" placeholder="E-mail" > <br><br>
+            <input id="password" type="password" placeholder="**********" > <br><br>
+            <input id="c_password" type="password" placeholder="**********" > <br><br>
+            <button onclick="register()" >Register</button>
+        </div>
+    </main>
+</body>
+</html>
+
+
+<script>
+    let username = document.getElementById("username")
+    let email = document.getElementById("email")
+    let password = document.getElementById("password")
+    let c_password = document.getElementById("c_password")
+    let allUser = JSON.parse(localStorage.getItem("users"))  || []
+
+    let data ={
+        username: username.value,
+        email: email.value,
+        password: password.value
+    }
+
+
+    function register(){
+        let data ={
+            username: username.value,
+            email: email.value,
+            password: password.value
+        }
+        allUser.push(data);
+        localStorage.setItem("users", JSON.stringify(allUser));
+        window.location.href = "login.html"
+
+    }
+</script>
