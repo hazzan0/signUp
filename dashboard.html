@@ -3,20 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Document</title>
+    <style>
+        nav{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        li{
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-    <div id="disp"></div>
+    <nav>
+        <div>Logo</div>
+        <ul>
+            <li>
+                <a href="profile.html">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span class="material-symbols-outlined">arrow_drop_down</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div id="">
+        <h1>Welcome to your dashbord <span id="disp"></span></h1>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div>
+        <h1>Post a blog</h1>
+        <input type="text" placeholder="Blog Title"><br><br>
+        <textarea id="" cols="30" rows="10" placeholder="Blog Content"></textarea><br><br>
+        <button>Post Blog</button>
+    </div>
 </body>
 </html>
 
 <script>
     let disp = document.getElementById("disp");
-    let loggedInUser = localStorage.getItem("loggedInUser");
-
+    let loggedInUser = JSON.parse(localStorage.getItem("currentUser"));
+    console.log(loggedInUser);
     if(loggedInUser){
-        disp.innerHTML = ("Welcome to the dashboard" + loggedInUser);
+        disp.innerHTML =loggedInUser.username;
     }else{
         disp.innerHTML = ("No user found")
+        alert("User not founnd")
+        window.location.href = "login.html"
+    }
+
+    function logout(){
+        localStorage.removeItem("currentUser");
+        alert("Logging out");
+        window.location.href = "login.html"
     }
 </script>

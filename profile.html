@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Document</title>
+    <style>
+        nav{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        li{
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div><a href="dashboard.html">Logo</a></div>
+        <ul>
+            <li>
+                <a href="profile.html">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span class="material-symbols-outlined">arrow_drop_down</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <section>
+        <h1>Edit User</h1>
+        <div>
+            <h5>Edit profile Image</h5>
+            <input id="picture" onchange="profilePix()" type="file">
+        </div>
+    </section>
+</body>
+</html>
+
+<script>
+    let picture = document.getElementById("picture");
+
+    function profilePix(){
+        let file = picture.files[0];
+        let reader = new FileReader();
+
+        reader.addEventListener("load", (e)=>{
+
+        })
+    }
+</script>
