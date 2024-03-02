@@ -39,11 +39,14 @@
         <textarea id="blogContent" cols="30" rows="10" placeholder="Blog Content"></textarea><br><br>
         <button onclick="postBlog()">Post Blog</button>
     </div>
+
+    <div id="dispBlog"></div>
 </body>
 </html>
 
 <script>
     let disp = document.getElementById("disp");
+    let dispBlog = document.getElementById("dispBlog")
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     console.log(currentUser);
     // console.log(currentUser.username);
@@ -62,7 +65,8 @@
         window.location.href = "login.html"
 
     }
-
+        let blogss = JSON.parse(localStorage.getItem("blogss")) || [];
+        console.log(blogss);
     function postBlog(){
         let blogTitle = document.getElementById("blogTitle").value;
         let blogContent = document.getElementById("blogContent").value;
@@ -74,12 +78,20 @@
             blogContent: blogContent,
             time: time,
         }
+        console.log(blog);
 
-        // let blogss = JSON.parse(localStorage.getItem("blogss"))
-
-        // blogss.push(blog);
-        // localStorage.setItem("blogss", JSON.stringify(blogss));
-
-        // console.log(blog);
+        blogss.push(blog);
+        localStorage.setItem("blogss", JSON.stringify(blogss));
+        dispPost()
     }
+
+    function dispPost(){
+        dispBlog.innerHTML = ""
+        blogss.forEach(element => {
+            dispBlog.innerHTML += `
+                <p>${element.blogContent}</p>
+            `
+        });
+    }
+    dispPost()
 </script>
