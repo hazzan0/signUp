@@ -36,6 +36,7 @@
     <div>
         <h1>Post a blog</h1>
         <input id="blogTitle" type="text" placeholder="Blog Title"><br><br>
+        <input onchange="pickBlogImg()" id="blogImg" type="file"><br><br>
         <textarea id="blogContent" cols="30" rows="10" placeholder="Blog Content"></textarea><br><br>
         <button onclick="postBlog()">Post Blog</button>
     </div>
@@ -67,15 +68,30 @@
     }
         let blogss = JSON.parse(localStorage.getItem("blogss")) || [];
         console.log(blogss);
+        let blogTitle = document.getElementById("blogTitle");
+        let blogImg = document.getElementById("blogImg")
+        let blogContent = document.getElementById("blogContent");
+        let blogUrl;
+
+        function pickBlogImg(){
+            let file = blogImg.files[0];
+            let reader = new FileReader();
+            reader.addEventListener("load", (e)=>{
+                blogUrl = e.target.result;
+            })
+            if(file){
+                reader.readAsDataURL(file);
+            }
+        }
     function postBlog(){
-        let blogTitle = document.getElementById("blogTitle").value;
-        let blogContent = document.getElementById("blogContent").value;
+        
         let time = new Date();
 
         let blog = {
             author: currentUser.username,
-            blogTitle: blogTitle,
-            blogContent: blogContent,
+            blogTitle: blogTitle.value,
+            blogContent: blogContent.value,
+            img: blogUrl,
             time: time,
         }
         console.log(blog);
@@ -90,6 +106,8 @@
         blogss.forEach(element => {
             dispBlog.innerHTML += `
                 <p>${element.blogContent}</p>
+                <img src="${element.img}" />
+                <button>del</button>
             `
         });
     }
