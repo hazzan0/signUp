@@ -33,6 +33,7 @@
         <div>
             <h5>Edit profile Image</h5>
             <input id="picture" onchange="profilePix()" type="file">
+            <img id="img">
         </div>
     </section>
 </body>
@@ -40,13 +41,18 @@
 
 <script>
     let picture = document.getElementById("picture");
+    let img = document.getElementById("img")
 
     function profilePix(){
         let file = picture.files[0];
-        let reader = new Filereader();
+        let reader = new FileReader();
 
         reader.addEventListener("load", (el)=>{
-
+            img.src = el.target.result
         })
+
+        if(file){
+            reader.readAsDataURL(file);
+        }
     }
 </script>

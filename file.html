@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <input id="selImg" onchange="pickImg()" type="file">
+        <img id="img">
+        <button onclick="prev()">Prev</button>
+        <button onclick="next()">Next</button>
+
+    </main>
+</body>
+</html>
+
+<script>
+    let selImg = document.getElementById("selImg");
+    let img = document.getElementById("img");
+    let imgArr = []
+    let index = 0
+
+    function pickImg(){
+        let file = selImg.files[0];
+        console.log(file);
+        let reader = new FileReader();
+        reader.addEventListener("load", (e)=>{
+            let res = e.target.result;
+            console.log(res);
+            imgArr.push(res);
+            // img.src = res
+            dispImg()
+        })
+
+        if(file){
+            reader.readAsDataURL(file);
+        }
+    }
+
+
+    function dispImg(){
+        if(imgArr == ""){
+            img.alt  = "No image yet"
+        }else{
+            img.src = imgArr[index]
+        }
+    }
+
+    dispImg()
+
+    function prev(){
+        if(index > 0){
+            index --
+        }else{
+            index = imgArr.length -1
+        }
+        dispImg()
+    }
+
+    function next(){
+        if(index < imgArr.length -1){
+            index ++
+        }else{
+            index = 0
+        }
+        dispImg()
+    }
+
+</script>
