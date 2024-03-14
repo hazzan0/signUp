@@ -31,6 +31,7 @@
     <section>
         <h1>Edit User</h1>
         <div>
+            <img id="myImg" alt="">
             <h5>Edit profile Image</h5>
             <input id="picture" onchange="profilePix()" type="file">
         </div>
@@ -40,13 +41,34 @@
 
 <script>
     let picture = document.getElementById("picture");
-
+    let myImg = document.getElementById("myImg");
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    let allUser = JSON.parse(localStorage.getItem('users'))
+    console.log(allUser);
+    console.log(user);
     function profilePix(){
         let file = picture.files[0];
-        let reader = new Filereader();
+        let reader = new FileReader();
 
         reader.addEventListener("load", (el)=>{
+            let rez = el.target.result;
+            user.img = rez;
+            myImg.src = rez;
+            let findUser = allUser.find((el)=> el.email == user.email)
+            if(findUser){
+                findUser.img = rez;
+                localStorage.setItem('users', JSON.stringify(allUser));
+                localStorage.setItem('currentUser', JSON.stringify(findUser));
+                console.log(findUser);
+                console.log(allUser);
 
+            }
+            // window.reload()
         })
+
+        if(file){
+            reader.readAsDataURL(file);
+        }
     }
+
 </script>

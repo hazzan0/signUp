@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h1 id="dispNum"></h1>
+        <button onclick="press(1,5)">1</button>
+        <button onclick="press(2)">2</button>
+        <button onclick="press(3)">3</button>
+
+        <input type="text" id="inp">
+        <button onclick="but()">Submit</button>
+        <h1 id="showNum"></h1>
+        <button>-</button>
+        <button>+</button>
+    </main>
+</body>
+</html>
+
+<script>
+    let num = 0
+    // Math.random, Math.floor, Math.ceil, Math.round...
+    // console.log(Math.floor(Math.random() * 10000));
+    // console.log(Math.floor(77.76543678));
+
+    let guess = Math.floor(Math.random() * 10);
+    console.log(guess);
+    // document.body.style.backgroundColor = "teal"
+    function but(){
+
+        Number(inp.value) === guess? alert("Correct"): alert("Wrong");
+        // if (inp.value == guess){
+        //     alert("You are correct")
+        // }else{
+        //     alert("You are wrong, try again")
+        // }
+    }
+
+    // Ternary operator(?)
+    // OBJECT=> informations in key value pair
+
+    let name = "Daniel";
+    let age = 11
+    let gender = "Male";
+    let skinColor = "Fair"
+    let current_class = "HTML"
+
+    console.log(name);
+    console.log(age);
+
+    let student = {name: "Daniel", age: 7, gender: "Male", skinColor: "Fair", current_class: "HTML"}
+
+    console.log(student);
+    console.log(student.current_class);
+    student.height = 5.7
+    console.log(student);
+    
+    console.log(inp.type);
+    inp.value = 50;
+    console.log(inp);
+</script>
