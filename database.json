@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "ac48",
+      "username": "Another",
+      "email": "another@gmail.com",
+      "password": "another"
+    },
+    {
+      "id": "7acf",
+      "username": "vent",
+      "email": "vent@gmail.com",
+      "password": "vent"
+    },
+    {
+      "id": "af88",
+      "username": "vent",
+      "email": "vent@gmail.com",
+      "password": "vent"
+    },
+    {
+      "id": "945a",
+      "username": "vent",
+      "email": "vent@gmail.com",
+      "password": "vent"
+    },
+    {
+      "id": "81d2",
+      "username": "vent",
+      "email": "vent@gmail.com",
+      "password": "vent"
+    }
+  ]
+}

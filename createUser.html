@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <input id="username" type="text" placeholder="Username"><br><br>
+        <input id="email" type="email" placeholder="E-mail"><br><br>
+        <input id="password" type="password" placeholder="******"><br><br>
+        <button onclick="registerUser(event)" >Register</button>
+    </form>
+
+    <form action="">
+        <h1>Edit User</h1>
+        <input id="editUsername" type="text" placeholder="Username"><br><br>
+        <input id="editEmail" type="email" placeholder="E-mail"><br><br>
+        <input id="editPassword" type="password" placeholder="******"><br><br>
+        <button onclick="editUser(event)">Edit User</button>
+    </form>
+
+    <div id="screen"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+        <tbody id="table">
+
+        </tbody>
+    </table>
+</body>
+</html>
+
+<script>
+    let screen = document.getElementById("screen");
+    let table = document.getElementById("table");
+
+    function registerUser(ev){
+        ev.preventDefault();
+        let data = {
+            username: username.value,
+            email: email.value,
+            password: password.value
+        }
+        console.log(data);
+        fetch("http://localhost:8899/users",{
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then((res)=>res.json())
+        .then((data)=>{
+            console.log(data);
+        }).catch((err)=>{
+            console.log(err);
+        })
+        .then((data)=>{
+            screen.innerHTML = JSON.stringify(data)
+        })
+    }
+
+    function editUser(ev){
+        ev.preventDefault();
+        let data = {
+            username: editUsername.value,
+            email: editEmail.value,
+            password: editPassword.value
+        }
+        fetch("http://localhost:8899/users/7acf", {
+            method: "PATCH",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then((res)=> res.json())
+        .then((data)=>{
+            console.log(data);
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+
+    // fetch("https://dummyjson.com/users").then((res)=>res.json()).then((data)=>{data.users.forEach((users)=>{
+    //     document.getElementById("screen").innerHTML = JSON.stringify(data)
+    // })
+
+    fetch("http://localhost:8899/users").then((res)=>res.json()).then((data)=>{
+        console.log(data);
+        data.forEach((users)=>{
+        table.innerHTML += `
+    <tr>
+        <td>${users.id}</td>
+        <td>${users.username}</td>
+        <td>${users.email}</td>
+    </tr>
+    `
+        })
+    })
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main></main>
+    <div id="get">
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>E-mail</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody id="table">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
+
+<script>
+    let table = document.getElementById("table")
+    let get = document.getElementById("get")
+
+    // table.innerHTML = `
+    // <tr>
+    //     <td>${data[users].firstname}</td>
+    //     <td>${data[users].lastName}</td>
+    //     <td>${data[users].email}</td>
+    //     <td>${data[users].phone}</td>
+    // </tr>
+    // `
+    fetch("https://dummyjson.com/users").then((res)=>res.json()).then((data)=>{data.users.forEach((users)=>{
+        console.log(data);
+        table.innerHTML += `
+    <tr>
+        <td>${users.firstName}</td>
+        <td>${users.lastName}</td>
+        <td>${users.email}</td>
+        <td>${users.phone}</td>
+    </tr>
+    `
+    })
+        console.log(data);
+    })
+</script>

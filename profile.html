@@ -22,7 +22,8 @@
         <ul>
             <li>
                 <a href="profile.html">
-                    <span class="material-symbols-outlined">account_circle</span>
+                    <img id="ifImg" src="" alt="">
+                    <span id="ifNoImg" class="material-symbols-outlined">account_circle</span>
                     <span class="material-symbols-outlined">arrow_drop_down</span>
                 </a>
             </li>
@@ -42,13 +43,42 @@
 <script>
     let picture = document.getElementById("picture");
     let img = document.getElementById("img")
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    let allUser = JSON.parse(localStorage.getItem("users"))
+    ifImg = document.getElementById("ifImg");
+    ifNoImg = document.getElementById("ifNoImg")
+    console.log(allUser);
+    console.log(user);
+
+    function checkProfilePicture(){
+        if(currentUser.img == ""){
+            ifNoImg.style.display = "initial"
+            ifImg.style.display = "none"
+        }else{
+            ifImg.style.display = "initial"
+            ifNoImg.style.display = "none"
+            ifImg.src = currentUser.img
+        }
+    }
+    checkProfilePicture()
 
     function profilePix(){
         let file = picture.files[0];
         let reader = new FileReader();
 
         reader.addEventListener("load", (el)=>{
-            img.src = el.target.result
+            // img.src = el.target.result
+            let res = el.target.result
+            user.img = res;
+            img.src = res;
+            let findUser = allUser.find((el)=> el.email == user.email)
+            if(findUser){
+                findUser.img = res;
+                localStorage.setItem("users", JSON.stringify(allUser));
+                localStorage.setItem("currentUser", JSON.stringify(findUser));
+                console.log(findUser);
+                console.log(allUser);
+            }
         })
 
         if(file){

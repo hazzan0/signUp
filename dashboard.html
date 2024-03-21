@@ -22,7 +22,8 @@
         <ul>
             <li>
                 <a href="profile.html">
-                    <span class="material-symbols-outlined">account_circle</span>
+                    <img width="30" height="30" id="ifImg" src="" alt="uuu">
+                    <span id="ifNoImg" class="material-symbols-outlined">account_circle</span>
                     <span class="material-symbols-outlined">arrow_drop_down</span>
                 </a>
             </li>
@@ -46,11 +47,25 @@
 </html>
 
 <script>
+    let ifImg = document.getElementById("ifImg")
+    let ifNoImg = document.getElementById("ifNoImg")
     let disp = document.getElementById("disp");
     let dispBlog = document.getElementById("dispBlog")
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     console.log(currentUser);
-    // console.log(currentUser.username);
+    console.log(currentUser.img);
+
+    function checkProfilePicture(){
+        if(currentUser.img == ""){
+            ifNoImg.style.display = "initial"
+            ifImg.style.display = "none"
+        }else{
+            ifImg.style.display = "initial"
+            ifNoImg.style.display = "none"
+            ifImg.src = currentUser.img
+        }
+    }
+    checkProfilePicture()
 
     if(currentUser){
         disp.innerHTML = currentUser.username;
@@ -91,6 +106,7 @@
             author: currentUser.username,
             blogTitle: blogTitle.value,
             blogContent: blogContent.value,
+            isLike: false,
             img: blogUrl,
             time: time,
         }
@@ -110,7 +126,7 @@
                 <p>${element.blogContent}</p>
                 <img src="${element.img}" />
                 <button onclick="delBlog(${index})">del</button>
-                <button onclick="likeBlog(${index})">Like</button>
+                <button onclick="likeBlog(${index})">${element.isLike? "Unlike": "Like"}</button>
             `
         });
     }
@@ -125,7 +141,12 @@
         dispPost()
     }
 
-    function likeBlog(){
-        
+    function likeBlog(i){
+        let oneBlog = blogss[i];
+        console.log(oneBlog);
+        oneBlog.isLike = !oneBlog.isLike
+        localStorage.setItem("blogss",
+        JSON.stringify(blogss))
+        dispPost();
     }
 </script>
